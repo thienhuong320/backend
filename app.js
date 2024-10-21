@@ -4,7 +4,8 @@ app.use(express.json());
 const port = 3001;
 
 app.use('/api/user', require('./src/routes/userRoutes'))
-
+app.use('/api/admin', require('./src/routes/adminRoutes'))
+app.use('/api/games', require('./src/routes/gamesRoutes'))
 // connect db
 const connection = require('./src/config/index');
 connection.query('SELECT 1').then(()=>{
