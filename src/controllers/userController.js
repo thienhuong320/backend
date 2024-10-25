@@ -96,10 +96,45 @@ const deleteUser = async (req, res) => {
     }
 }
 
+// login user
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const data = await connection.query(`SELECT * FROM user WHERE email = ? AND password = ?`, [email, password]);
+        if(!data){
+            return res.status(400).send({
+                success: false,
+                message: 'Login user failed'
+            })
+        }
+        res.status(200).send({ data: data[0] });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+// register user
+const registerUser = async (req, res) => {
+    try {
+        const { user_name, email, password, fullname } = req.body;
+        const data = await connection.query(`INSERT INTO user (user_name, email, password, fullname) VALUES (?, ?, ?, ?)`, [user_name, email, password, fullname]);
+        res.status(200).send({ data: data[0] });
+        if(!data){
+            return res.status(400).send({
+                success: false,
+                message: 'Register user failed'
+            })
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
 module.exports = {
     getAllUser,
     getUserById,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    loginUser,
+    registerUser
 }
