@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 app.use(express.json());
-const dotenv = require("dotenv");
-dotenv.config()
 
-const port  = process.env.PORT || 5000;
+
+const port  =  5000;
+app.use(cors());
 const connection = require('./src/config/index');
 app.use('/api/user', require('./src/routes/userRoutes'))
 app.use('/api/admin', require('./src/routes/adminRoutes'))

@@ -4,16 +4,19 @@ const connection = require('../config/index');
 const getAllScore = async (req, res) => {
     try {
         const data = await connection.query(` SELECT
-    score.score_id,
+    score.score_id,score.score,
     JSON_OBJECT(
         'user_id', user.user_id,
         'user_name', user.user_name,
-        'email', user.email
+        'email', user.email,
+        'thumbnail', user.thumbnail
+        
     ) AS user_info,
     JSON_OBJECT(
         'game_id', games.game_id,
         'game_name', games.game_name,
-        'genre', games.genre
+        'genre', games.genre,
+        'image', games.image
     ) AS game_info
 FROM score
 INNER JOIN user ON score.user_id = user.user_id
