@@ -20,11 +20,11 @@ const getAllGames = async (req, res) => {
 }   
 // get game by id
 
-const getRecently = async (req, res) => {
+const getUehReview = async (req, res) => {
    
 
     try {
-        const data = await connection.query(' SELECT * FROM games WHERE genre = "uehreview" ');
+        const data = await connection.query(' SELECT * FROM games WHERE tag = "uehreview" ');
         res.status(200).send({ data: data[0] });
         if(!data){
             return res.status(400).send({
@@ -125,7 +125,7 @@ module.exports = {
     createGame,
     updateGame,
     deleteGame,
-    getRecently
+    getUehReview
 }
 
 
