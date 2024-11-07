@@ -1,11 +1,16 @@
 const express = require('express');
-const { getAllGames, getGameById, createGame, updateGame, deleteGame, getUehReview } = require('../controllers/gamesController');
+const { getAllGames, getGameById, createGame, updateGame, deleteGame, getUehReview, getUehGreen, getEduGames, getTopGame } = require('../controllers/gamesController');
 const router = express.Router();
 
 // get all games
 router.get('/getall', getAllGames);
 
-router.get('/', getUehReview);
+router.get('/topgame',getTopGame);
+router.get('/uehreview', getUehReview);
+
+router.get('/uehgreen', getUehGreen);
+
+router.get('/edugames', getEduGames);
 // get game by id
 router.get('/get/:id', getGameById);
 
